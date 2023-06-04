@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.3">
+  <object class="tk.Toplevel" id="toplevel1">
+    <property name="borderwidth">5</property>
+    <property name="height">200</property>
+    <property name="title" translatable="yes">Thread</property>
+    <property name="width">200</property>
+    <child>
+      <object class="ttk.Frame" id="frame1">
+        <property name="borderwidth">10</property>
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="units_label" named="True">
+            <property name="text" translatable="yes">Units</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">0 5</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.OptionMenu" id="opt_units" named="True">
+            <property name="command" type="command" cbtype="simple">on_units</property>
+            <property name="direction">below</property>
+            <property name="value">Inch</property>
+            <property name="values">Inch,MM</property>
+            <property name="variable">string:units</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="flank_label" named="True">
+            <property name="text" translatable="yes">Flanking 	Infeed</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="majorDia_label" named="True">
+            <property name="text" translatable="yes">Major Diameter</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="feed_label" named="True">
+            <property name="text" translatable="yes">Thread Pitch</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="threadCenter_label" named="True">
+            <property name="text" translatable="yes">Z Initial Position</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">6</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="zFinal_label" named="True">
+            <property name="text" translatable="yes">Z Final Position</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">7</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="numPass_label" named="True">
+            <property name="text" translatable="yes">Number of Passes</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">8</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="infeedAngle_label" named="True">
+            <property name="text" translatable="yes">Infeed Angle</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">9</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="threadDepth_label" named="True">
+            <property name="text" translatable="yes">Thread Depth</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">10</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="tool_label" named="True">
+            <property name="text" translatable="yes">Tool#</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">11</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="workOffset_label" named="True">
+            <property name="text" translatable="yes">Work Offset</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">12</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="threadClass_label" named="True">
+            <property name="text" translatable="yes">Thread Class</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="spindleSpeed_label" named="True">
+            <property name="text" translatable="yes">Cutting Speed</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">13</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.OptionMenu" id="op_flank" named="True">
+            <property name="command" type="command" cbtype="simple">on_flank</property>
+            <property name="direction">below</property>
+            <property name="value">No</property>
+            <property name="values">No,Yes</property>
+            <property name="variable">string:flank</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.OptionMenu" id="opt_threadClass" named="True">
+            <property name="command" type="command" cbtype="simple">on_threadClass</property>
+            <property name="value">External</property>
+            <property name="values">External</property>
+            <property name="variable">string:threadClass</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_majorDia" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:majorDia</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_feed" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:feed</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_zFinal" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:zFinal</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">7</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_numPass" named="True">
+            <property name="text" translatable="yes">1</property>
+            <property name="textvariable">int:numPass</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">8</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_infeedAngle" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:infeedAngle</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">9</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="threadDepth_lab" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:threadDepth</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">10</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_tool" named="True">
+            <property name="text" translatable="yes">0000</property>
+            <property name="textvariable">string:tool</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">11</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="entry10">
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">12</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_workOffset" named="True">
+            <property name="text" translatable="yes">54</property>
+            <property name="textvariable">int:workOffset</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">12</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_threadCenter" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">double:threadCenter</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">6</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="ent_spindleSpeed" named="True">
+            <property name="text" translatable="yes">100</property>
+            <property name="textvariable">int:spindleSpeed</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">13</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="buttons" named="True">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Button" id="generate_button" named="True">
+            <property name="command" type="command" cbtype="simple">on_gererate_button_clicked</property>
+            <property name="text" translatable="yes">Generate</property>
+            <layout manager="pack">
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
