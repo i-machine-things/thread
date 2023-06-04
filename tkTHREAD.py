@@ -201,7 +201,7 @@ class TkthreadApp:
             frame1, self.units, "Inch", *__values, command=self.on_units)
         self.opt_units.grid(column=1, row=1, sticky="w")
         self.flank_label = ttk.Label(frame1)
-        self.flank_label.configure(text='Flanking \tInfeed')
+        self.flank_label.configure(text='Flanking Infeed')
         self.flank_label.grid(column=0, row=2, sticky="w")
         self.majorDia_label = ttk.Label(frame1)
         self.majorDia_label.configure(text='Major Diameter')
