@@ -176,7 +176,7 @@
           <object class="ttk.OptionMenu" id="opt_threadClass" named="True">
             <property name="command" type="command" cbtype="simple">on_threadClass</property>
             <property name="value">External</property>
-            <property name="values">External</property>
+            <property name="values">External,Internal</property>
             <property name="variable">string:threadClass</property>
             <layout manager="grid">
               <property name="column">1</property>

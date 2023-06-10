@@ -87,7 +87,7 @@ def generate_code():
     z_Offset = np.tan(np.deg2rad(infeedAngle))
     zInitialFlank = (threadCenter - round(threadDepth * z_Offset,4))
     zInitial = (threadCenter + round(threadDepth * z_Offset,4))
-    filename = f'{majorDia} X {feed} {units} {infeedAngle*2} DEG THREAD'
+    filename = f'{threadClass} {majorDia} X {feed} {units} {infeedAngle*2} DEG THREAD'
     fileType = '.nc'
 
     if not os.path.exists(directory):
