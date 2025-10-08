@@ -6,6 +6,8 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 import os
+import Sys
+
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "tkthread.ui"
 directory = "output"
