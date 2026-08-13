@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['tkTHREAD.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='tkTHREAD',
+    name='thread',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
