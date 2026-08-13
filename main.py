@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 import numpy as np
@@ -24,49 +23,49 @@ def generate_code():
         get_output(f'G50 S{maxSpindlespeed} T{tool}')
 
     def start_spindle():
-        get_output(f'G97 S{spindleSpeed} M3 P11')   
-        
+        get_output(f'G97 S{spindleSpeed} M3 P11')
+
     def stop_spindle():
-        get_output(f'M5')
-         
+        get_output('M5')
+
     def write_units():
         if units == "Inch":
             get_output('G20')
         elif units == "MM":
             get_output('G21')
-        
+
     def program_reset():
-        get_output(F'M30\n%')
-        
+        get_output('M30\n%')
+
     def program_start():
         get_output(f'%\nO1000 ({filename})')
 
     def home_x():
-        get_output(f'G28 U0.0')
+        get_output('G28 U0.0')
 
     def home_z():
-        get_output(f'G28 W0.0')     
+        get_output('G28 W0.0')
 
-    units = app.units.get() #get_input('Inch (I) or MM (M)\nDefault Inch: ', 'i').lower()
-    flank = app.flank.get() #get_input('Flanking infeed? Y/N\nDefault No: ', 'n').lower()
-    threadClass = app.threadClass.get() #"E"  # internal (I) or external (E) hard-coded default value
-    #threadClass = "Internal"
-    majorDia = float(app.majorDia.get()) #float(get_input('Major Diameter: ', 0))
-    feed = float(app.feed.get()) #float(get_input('Thread Pitch: ', 0))
-    threadCenter = float(app.threadCenter.get()) #float(get_input('Z Initial Position: ', 0))
-    zFinal = float(app.zFinal.get()) #float(get_input('Z Final Position: ', 0))
-    numPass = abs(app.numPass.get()) #abs(int(get_input('Number of Passes\nDefault 1: ', 1)))
-    infeedAngle = float(app.infeedAngle.get()) #float(get_input('Infeed Angle\nDefault 29.5: ', 29.5))
-    threadDepth = float(app.threadDepth.get()) #float(get_input('Radial Thread Depth\nDefault 0: ', 0))
-    tool = str(app.tool.get()) #str(get_input('Tool#\nDefault 0000: ', '0000'))
-    workOffset = int(app.workOffset.get()) #int(get_input('Work Offset\nDefault 54: ', 54))
-    spindleSpeed = int(app.spindleSpeed.get()) #int(get_input('Cutting Speed\nDefault 100: ', 100))
+    units = app.units.get()  # get_input('Inch (I) or MM (M)\nDefault Inch: ', 'i').lower()
+    flank = app.flank.get()  # get_input('Flanking infeed? Y/N\nDefault No: ', 'n').lower()
+    threadClass = app.threadClass.get()  # "E"  # internal (I) or external (E) hard-coded default value
+    # threadClass = "Internal"
+    majorDia = float(app.majorDia.get())  # float(get_input('Major Diameter: ', 0))
+    feed = float(app.feed.get())  # float(get_input('Thread Pitch: ', 0))
+    threadCenter = float(app.threadCenter.get())  # float(get_input('Z Initial Position: ', 0))
+    zFinal = float(app.zFinal.get())  # float(get_input('Z Final Position: ', 0))
+    numPass = abs(app.numPass.get())  # abs(int(get_input('Number of Passes\nDefault 1: ', 1)))
+    infeedAngle = float(app.infeedAngle.get())  # float(get_input('Infeed Angle\nDefault 29.5: ', 29.5))
+    threadDepth = float(app.threadDepth.get())  # float(get_input('Radial Thread Depth\nDefault 0: ', 0))
+    tool = str(app.tool.get())  # str(get_input('Tool#\nDefault 0000: ', '0000'))
+    workOffset = int(app.workOffset.get())  # int(get_input('Work Offset\nDefault 54: ', 54))
+    spindleSpeed = int(app.spindleSpeed.get())  # int(get_input('Cutting Speed\nDefault 100: ', 100))
 
     maxSpindlespeed = 250
     xClearance = .1
     z_Offset = np.tan(np.deg2rad(infeedAngle))
-    zInitialFlank = (threadCenter - round(threadDepth * z_Offset,4))
-    zInitial = (threadCenter + round(threadDepth * z_Offset,4))
+    zInitialFlank = (threadCenter - round(threadDepth * z_Offset, 4))
+    zInitial = (threadCenter + round(threadDepth * z_Offset, 4))
     filename = f'{threadClass} {majorDia} X {feed} {units} {infeedAngle*2} DEG THREAD'
     fileType = '.nc'
 
@@ -74,22 +73,28 @@ def generate_code():
         os.makedirs(directory)
 
     with open(f'{directory}/{filename}{fileType}', 'w') as f:
-        
+
         program_start()
         write_units()
         home_x()
         home_z()
         write_tool()
-        start_spindle()    
+        start_spindle()
         if threadClass == "External":
-            xApproach = round(majorDia + xClearance, 1) # APPROACH DIAMETER
+            xApproach = round(majorDia + xClearance, 1)  # APPROACH DIAMETER
             if numPass == 1:
-                doC = threadDepth #SINGLE PASS
+                doC = threadDepth  # SINGLE PASS
             else:
-                doC = (threadDepth / numPass) # doC FIRST PASS
-            diaFirstpass = round(majorDia - (2 * doC), 4) # DIAMETER OF FIRST PASS
-            zInitial = round(zInitial - (doC * z_Offset),4)
-            get_output(f'G0 G{workOffset} X{xApproach} Z{threadCenter}\nX{diaFirstpass} Z{zInitial}\nG32 Z{zFinal} F{feed}\nG0 X{xApproach}\nZ{threadCenter}')
+                doC = (threadDepth / numPass)  # doC FIRST PASS
+            diaFirstpass = round(majorDia - (2 * doC), 4)  # DIAMETER OF FIRST PASS
+            zInitial = round(zInitial - (doC * z_Offset), 4)
+            get_output(
+                f'G0 G{workOffset} X{xApproach} Z{threadCenter}\n'
+                f'X{diaFirstpass} Z{zInitial}\n'
+                f'G32 Z{zFinal} F{feed}\n'
+                f'G0 X{xApproach}\n'
+                f'Z{threadCenter}'
+            )
             i = 2
 
         if threadClass == "Internal":
@@ -98,31 +103,37 @@ def generate_code():
                 doC = threadDepth
             else:
                 doC = (threadDepth / numPass)
-            diaFirstpass = round(majorDia - (threadDepth * 2) + (2*doC),4)
-            get_output(f'G0 G{workOffset} X{xApproach} Z{threadCenter}\nX{diaFirstpass} Z{zInitial}\nG32 Z{zFinal} F{feed}\nG0 X{xApproach}\nZ{threadCenter}')
+            diaFirstpass = round(majorDia - (threadDepth * 2) + (2*doC), 4)
+            get_output(
+                f'G0 G{workOffset} X{xApproach} Z{threadCenter}\n'
+                f'X{diaFirstpass} Z{zInitial}\n'
+                f'G32 Z{zFinal} F{feed}\n'
+                f'G0 X{xApproach}\n'
+                f'Z{threadCenter}'
+            )
             i = 2
 
         if numPass >= 2:
             while i <= numPass:
-                if flank == "Yes": #LH
+                if flank == "Yes":  # LH
                     if i <= numPass:
                         apx = (threadDepth / numPass) * (i)
                         if threadClass == "External":
                             xpF = round(majorDia - (2 * apx), 4)
                         if threadClass == "Internal":
                             xpF = round(majorDia - (threadDepth * 2) + (2 * apx), 4)
-                        zShift = (apx) * z_Offset # SHIFT ON Z
-                        zF = round(zInitialFlank + zShift, 4) # Z SHIFTED FROM INITIAL Z
+                        zShift = (apx) * z_Offset  # SHIFT ON Z
+                        zF = round(zInitialFlank + zShift, 4)  # Z SHIFTED FROM INITIAL Z
                         i += 1
                         get_output(f'GO X{xpF} Z{zF}\nG32 z{zFinal} F{feed}\nG0 X{xApproach}\nZ{threadCenter}')
-                if i <= numPass:    
+                if i <= numPass:
                     apx = (threadDepth / numPass) * (i)
                     if threadClass == "External":
                         xp = round(majorDia - (2 * apx), 4)
                     if threadClass == "Internal":
                         xp = round(majorDia - (threadDepth * 2) + (2 * apx), 4)
-                    zShift = (apx - doC) * z_Offset # SHIFT ON Z
-                    z = round(zInitial - zShift, 4) # Z SHIFTED FROM INITIAL Z
+                    zShift = (apx - doC) * z_Offset  # SHIFT ON Z
+                    z = round(zInitial - zShift, 4)  # Z SHIFTED FROM INITIAL Z
                     i += 1
                     get_output(f'G0 X{xp} Z{z}\nG32 Z{zFinal} F{feed}\nG0 X{xApproach}\nZ{threadCenter}')
 
@@ -301,4 +312,3 @@ class TkthreadApp:
 if __name__ == "__main__":
     app = TkthreadApp()
     app.run()
-
