@@ -6,15 +6,24 @@ file to `output/`.
 
 ## Running it
 
-Prebuilt binaries are in `dist/` (`tkTHREAD` for Linux, `tkTHREAD.exe` for Windows) — no Python required.
-
-To run from source instead:
+Run from source:
 
 ```
-python3 tkTHREAD.py
+pip install -r requirements.txt
+python3 main.py
 ```
 
 Requires `numpy` and Tk (`python3-tk` on Debian/Ubuntu if it's not already available).
+
+To build a standalone binary instead:
+
+```
+pip install pyinstaller
+pyinstaller main.spec
+```
+
+This produces `dist/thread` (Linux) or `dist/thread.exe` (Windows). `dist/` isn't tracked in this repo — grab
+a prebuilt binary from [Releases](../../releases) instead of building your own, or build it yourself as above.
 
 ## Fields
 
@@ -66,8 +75,11 @@ M30
 Always review generated G-code before running it at the machine, as with any tool that writes code you're about
 to cut metal with.
 
-## Known issue
+## Project layout
 
-`tkTHREAD.py` has `import Sys` (capital S) at the top, which will fail on a case-sensitive filesystem/Python
-install unless there's a local `Sys.py` — should be lowercase `import sys`. Doesn't affect the prebuilt
-binaries in `dist/`, only running from source.
+| File | Purpose |
+|---|---|
+| `main.py` | Entry point — GUI + `generate_code()` (the G-code generation logic) |
+| `main.ui` | pygubu-designer source for the GUI layout (editable design source, not loaded at runtime) |
+| `main.spec` | PyInstaller build spec |
+| `requirements.txt` | Runtime dependencies (`numpy`; `tkinter`/`pathlib`/`os` are stdlib) |
