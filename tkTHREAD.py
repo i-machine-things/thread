@@ -6,33 +6,11 @@ import pathlib
 import tkinter as tk
 import tkinter.ttk as ttk
 import os
-import Sys
 
 PROJECT_PATH = pathlib.Path(__file__).parent
-PROJECT_UI = PROJECT_PATH / "tkthread.ui"
+PROJECT_UI = PROJECT_PATH / "main.ui"
 directory = "output"
 path = os.path.join(PROJECT_PATH, directory)
-
-units = None
-flank = None
-threadClass = None
-majorDia = None
-feed = None
-threadCenter = None
-zFinal = None
-numPass = None
-infeedAngle = None
-threadDepth = None
-tool = None
-workOffset = None
-spindleSpeed = None
-maxSpindlespeed = None
-xClearance = None
-z_Offset = None
-zInitialFlank = None
-zInitial = None
-filename = None
-fileType = None
 
 
 def generate_code():
